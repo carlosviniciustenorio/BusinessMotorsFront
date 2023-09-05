@@ -3,16 +3,37 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MenuComponent } from './components/navegation/menu/menu.component';
+import { FooterComponent } from './components/navegation/footer/footer.component';
+import { HomeComponent } from './components/navegation/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { AnunciosComponent } from './components/anuncios/anuncios.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
+import { ApiService } from './api.service';
+import { AuthService } from './components/login/auth.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    FooterComponent,
+    HomeComponent,
+    LoginComponent,
+    AnunciosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    ApiService,
+    {provide: APP_BASE_HREF, useValue: '/'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
