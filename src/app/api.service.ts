@@ -11,11 +11,11 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getAnuncios(): Observable<any> {
+  getAnuncios(skip: number, take: number): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}`
     });
 
-    return this.http.get(`${this.apiUrl}/anuncio/getAll?take=10&skip=0`, { headers });
+    return this.http.get(`${this.apiUrl}/anuncio/getAll?take=${take}&skip=${skip}`, { headers });
   }
 }

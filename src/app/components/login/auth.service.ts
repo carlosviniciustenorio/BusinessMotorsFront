@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { AuthResponse } from './auth.response';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +12,27 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string, senha: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/usuarios/login`, credentials);
-  }
-
-  setToken(token: string): void {
-    this.token = token;
-    localStorage.setItem('token', token);
+  login(credentials: { email: string, senha: string }): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/usuarios/login`, credentials)
+      .pipe(
+        tap((response: AuthResponse) => {
+          if (response.sucesso) {
+            localStorage.setItem('accessToken', response.accessToken);
+            localStorage.setItem('refreshToken', response.refreshToken);
+          }
+        })
+      );
   }
 
   getToken(): string | null {
     if (!this.token) {
-      this.token = localStorage.getItem('token');
+      this.token = localStorage.getItem('accessToken');
     }
     return this.token;
   }
 
   logout(): void {
     this.token = null;
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
   }
 }

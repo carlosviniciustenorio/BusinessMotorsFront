@@ -1,0 +1,104 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.hero {
+    background-image: url('https://cdn.gencraft.com/prod/user/1c1e1aca-fdae-48b8-9b60-0c3db36b44b7/2873057c-f3e2-4784-b156-141ff7e7e2fb/images/image0_0_watermark.jpg?Expires=1694029506&Signature=F58mjCwrjqbpEeZMEr54ln9cxnadtXXZGBxsYAxY~s8lshzorxOzefjjiMCDy52DD-ngvzeBcgPYoGWS1r5tWFAtw7vfEuXNgo0RxLYPzHJlLczKeP5j4aI9z0JF2yhUPc2RicrB18s~Daqv6W~PVdJpnagqh5zxF3512QPmwMPUwJWZWl-vLvdM6FvauVzWFxUdQxeBV44ePyXDqQgFP~1qpW2ckJo~717E9kVlK1c-jJyXfAd9pG3bHnGMQETo9rt7zDR0NcwhlltXK4v61wvrFTP9pE6hZMl54kUPHXPIaoAyoD-iIcPpD3sa435UJCcsZGc5IJf0eHy9mpgiOA__&Key-Pair-Id=K3RDDB1TZ8BHT8');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.featured-cars {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.featured-cars h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.car-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 5%;
+}
+
+.car-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.car-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}

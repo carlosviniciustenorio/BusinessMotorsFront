@@ -11,8 +11,7 @@ export class LoginComponent {
 
   login(credentials: { email: string, senha: string }): void {
     this.authService.login(credentials).subscribe(
-      (response: any) => {
-        this.authService.setToken(response.token);
+      () => {
         this.router.navigate(['/home']);
       },
       (error: any) => {
