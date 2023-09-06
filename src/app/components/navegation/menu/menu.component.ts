@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
 
@@ -7,8 +7,20 @@ import { AuthService } from '../../login/auth.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit{
+  isAuthenticated = false;
   constructor(private authService: AuthService, private router: Router){}
+  
+  ngOnInit(): void {
+    this.authService.loginEvent.subscribe(() => {
+      this.isAuthenticated = true;
+    });
+
+    this.authService.logoutEvent.subscribe(() => {
+      this.isAuthenticated = false;
+    });
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

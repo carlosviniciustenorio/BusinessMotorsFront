@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ApiService } from './api.service';
 import { AuthService } from './components/login/auth.service';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthService } from './components/login/auth.service';
   providers: [
     AuthService,
     ApiService,
+    AuthGuardService,
     {provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [AppComponent]

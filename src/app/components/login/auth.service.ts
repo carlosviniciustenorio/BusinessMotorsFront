@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { AuthResponse } from './auth.response';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,11 @@ import { AuthResponse } from './auth.response';
 export class AuthService {
   private apiUrl = 'https://localhost:7110/api';
   private token: string | null = null;
+  isAuthenticated = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+  loginEvent = new Subject<void>();
+  logoutEvent = new Subject<void>();
 
   login(credentials: { email: string, senha: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/usuarios/login`, credentials)
@@ -19,6 +23,7 @@ export class AuthService {
           if (response.sucesso) {
             localStorage.setItem('accessToken', response.accessToken);
             localStorage.setItem('refreshToken', response.refreshToken);
+            this.loginEvent.next();
           }
         })
       );
@@ -34,5 +39,30 @@ export class AuthService {
   logout(): void {
     this.token = null;
     localStorage.removeItem('accessToken');
+    this.logoutEvent.next();
+  }
+
+  setAuthenticated(isAuth: boolean) {
+    this.isAuthenticated = isAuth;
+  }
+
+  validateToken(): boolean {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      const tokenData = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+
+      if (tokenData.exp > currentTime) {
+        console.log('Token válido');
+        this.isAuthenticated = true;
+        return true;
+      } else {
+        // this.router.navigate(['login']);
+        return false;
+      }
+    } else {
+      // this.router.navigate(['login']);
+      return false;
+    }
   }
 }
