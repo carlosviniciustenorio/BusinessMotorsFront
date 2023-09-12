@@ -18,6 +18,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { ApiService } from './api.service';
 import { AuthService } from './components/login/auth.service';
 import { AuthGuardService } from './auth-guard.service';
+import { AnuncioComponent } from './components/anuncio/anuncio.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthGuardService } from './auth-guard.service';
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    AnunciosComponent
+    AnunciosComponent,
+    AnuncioComponent
   ],
   imports: [
     BrowserModule,

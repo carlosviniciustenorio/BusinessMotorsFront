@@ -1,29 +1,61 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/api.service';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadAnuncios, loadMoreAnuncios } from './anuncios.actions';
+import {
+  Anuncio,
+  AnunciosState,
+} from './anuncios.state';
 
 @Component({
   selector: 'app-anuncios',
   templateUrl: './anuncios.component.html',
-  styleUrls: ['./anuncios.component.css']
+  styleUrls: ['./anuncios.component.css'],
 })
 export class AnunciosComponent implements OnInit {
-  anuncios: any[] = [];
+  anuncios: Anuncio[] = [];
+  itemsPerPage = 10;
+  currentPage = 0;
+  loading = false;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private router: Router,
+    private store: Store<{ anuncios: AnunciosState }>
+  ) { }
 
-  ngOnInit(): void {
-    this.buscarAnuncios();
+  ngOnInit() {
+    this.store.dispatch(loadAnuncios({
+      skip: this.currentPage * this.itemsPerPage,
+      take: this.itemsPerPage,
+    })
+    );
+    window.addEventListener('scroll', this.onScroll.bind(this));
   }
 
-  buscarAnuncios() {
-    this.apiService.getAnuncios(0, 10)
-    .subscribe(
-      (response) => {
-        this.anuncios = response;
-      },
-      (error) => {
-        console.error('Erro ao buscar anúncios:', error);
-      }
-    );
+
+  onScroll() {
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    if (scrollPosition >= documentHeight - 100) {
+      this.loadMoreItems();
+    }
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  navigateToAnuncio(id: string) {
+    this.router.navigate(['/anuncio', id]);
+  }
+
+  loadMoreItems() {
+    if (this.loading) {
+      return;
+    }
+
+    this.loading = true;
+    this.store.dispatch(loadMoreAnuncios({ skip: this.currentPage * this.itemsPerPage, take: this.itemsPerPage }));
   }
 }

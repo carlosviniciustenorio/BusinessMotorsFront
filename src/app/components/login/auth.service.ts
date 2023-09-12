@@ -2,17 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { AuthResponse } from './auth.response';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7110/api';
+  private apiUrl = 'http://localhost:8000/api';
   private token: string | null = null;
   isAuthenticated = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
   loginEvent = new Subject<void>();
   logoutEvent = new Subject<void>();
 
@@ -57,11 +56,9 @@ export class AuthService {
         this.isAuthenticated = true;
         return true;
       } else {
-        // this.router.navigate(['login']);
         return false;
       }
     } else {
-      // this.router.navigate(['login']);
       return false;
     }
   }
