@@ -19,6 +19,11 @@ import { ApiService } from './api.service';
 import { AuthService } from './components/login/auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { AnuncioComponent } from './components/anuncio/anuncio.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { _anunciosReducer } from './components/anuncios/store/anuncios.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,11 @@ import { AnuncioComponent } from './components/anuncio/anuncio.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    StoreModule.forRoot({anuncios: _anunciosReducer}),
+    EffectsModule.forRoot([AnunciosEffects]),
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25,
+    // }),
     HttpClientModule
   ],
   providers: [

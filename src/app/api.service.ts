@@ -9,22 +9,19 @@ import { Anuncio } from './components/anuncio/anuncio.model';
 })
 export class ApiService {
   private apiUrl = 'http://localhost:8000/api';
-
+  
   constructor(private http: HttpClient, private authService: AuthService) {}
+  headers = new HttpHeaders({
+    'Authorization': `Bearer ${this.authService.getToken()}`
+  });
 
   getAnuncios(skip: number, take: number): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-
+    const headers = this.headers;
     return this.http.get(`${this.apiUrl}/anuncio/getAll?take=${take}&skip=${skip}`, { headers });
   }
 
   getAnuncio(idAnuncio: string): Observable<Anuncio> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-
+    const headers = this.headers;
     return this.http.get<Anuncio>(`${this.apiUrl}/anuncio?id=${idAnuncio}`, { headers });
   }
 }
