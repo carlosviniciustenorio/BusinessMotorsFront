@@ -1,18 +1,17 @@
 <div class="container mt-5" id="navigation">
-    <div class="row">
-      <div class="col-md-4 mb-4 car-card" *ngFor="let anuncio of anuncios">
-        <div class="card">
-          <img src="{{anuncio.imagens[0].arn}}" alt="Imagem do Anúncio" class="card-img">
-          <div class="card-body">
-            <h5 class="card-title">{{ anuncio.modelo.descricao }}</h5>
-            <p class="card-text">Ano: {{ anuncio.modelo.anoFabricacao }}</p>
-            <p class="card-text">Preço: {{ anuncio.preco | currency:'BRL':true:'1.2-2':'pt' }}</p>
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary btn-block" (click)="navigateToAnuncio(anuncio.id)">Detalhes</button>
-          </div>
+  <div class="row">
+    <div class="col-md-4 mb-4 car-card" *ngFor="let anuncio of anuncios$ | async ">
+      <div class="card">
+        <img src="{{anuncio.imagem.arn}}" alt="Imagem do Anúncio" class="card-img">
+        <div class="card-body">
+          <h5 class="card-title">{{ anuncio.modelo?.descricao }}</h5>
+          <p class="card-text">Ano: {{ anuncio.modelo?.anoFabricacao }}</p>
+          <p class="card-text">Preço: {{ anuncio.preco | currency:'BRL':true:'1.2-2':'pt' }}</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-block" (click)="navigateToAnuncio(anuncio.id)">Detalhes</button>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

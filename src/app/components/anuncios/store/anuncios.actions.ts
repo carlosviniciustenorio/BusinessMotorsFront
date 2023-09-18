@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Anuncio } from '../../anuncio/anuncio.model';
+import { Anuncios } from '../anuncios.model';
 
 export const loadAnuncios = createAction(
     '[Anuncios] Load Anuncios',
@@ -7,7 +7,7 @@ export const loadAnuncios = createAction(
   );
 export const loadAnunciosSuccess = createAction(
   '[Anuncios] Load Anuncios Success',
-  props<{ anuncios: Anuncio[] }>()
+  props<{ anuncios: Anuncios[] }>()
 );
 export const loadAnunciosFailure = createAction(
   '[Anuncios] Load Anuncios Failure',

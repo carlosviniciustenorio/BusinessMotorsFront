@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadAnuncios } from './store/anuncios.actions';
-import { Anuncio } from '../anuncio/anuncio.model';
+import { map } from 'rxjs/operators';
+import { IAnunciosState } from './store/anuncios.state';
 
 @Component({
   selector: 'app-anuncios',
@@ -10,21 +11,24 @@ import { Anuncio } from '../anuncio/anuncio.model';
   styleUrls: ['./anuncios.component.css'],
 })
 export class AnunciosComponent implements OnInit {
-  anuncios: Anuncio[] = [];
   itemsPerPage = 10;
   currentPage = 0;
   loading = false;
-
+  
   constructor(
     private router: Router,
-    private store: Store
-  ) { }
+    private store: Store<{ anuncios: IAnunciosState}>) { }
+    
+  anuncios$ = this.store.select('anuncios').pipe(
+    map(e => e.anuncios)
+  );
 
   ngOnInit() {
     this.store.dispatch(loadAnuncios({
       skip: this.currentPage * this.itemsPerPage,
       take: this.itemsPerPage,
     }));
+
     window.addEventListener('scroll', this.onScroll.bind(this));
   }
 

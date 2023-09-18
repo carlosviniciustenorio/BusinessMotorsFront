@@ -1,7 +1,7 @@
-import { Anuncio } from '../../anuncio/anuncio.model';
+import { Anuncios } from '../anuncios.model';
 
 export interface IAnunciosState {
-  anuncios: Anuncio[];
+  anuncios: Anuncios[];
   currentPage: number;
   isLoading: boolean;
 }
