@@ -41,9 +41,6 @@ import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
     FormsModule,
     StoreModule.forRoot({ anuncios: _anunciosReducer }),
     EffectsModule.forRoot([AnunciosEffects]),
-    // StoreDevtoolsModule.instrument({
-    //   maxAge: 25,
-    // }),
     HttpClientModule
   ],
   providers: [

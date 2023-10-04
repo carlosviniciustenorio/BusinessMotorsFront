@@ -17,11 +17,11 @@ export class ApiService {
 
   getAnuncios(skip: number, take: number): Observable<any> {
     const headers = this.headers;
-    return this.http.get(`${this.apiUrl}/anuncio/getAll?take=${take}&skip=${skip}`, { headers });
+    return this.http.get(`${this.apiUrl}/anuncio/getAll?take=${take}&skip=${skip}`);
   }
 
   getAnuncio(idAnuncio: string): Observable<Anuncio> {
     const headers = this.headers;
-    return this.http.get<Anuncio>(`${this.apiUrl}/anuncio?id=${idAnuncio}`, { headers });
+    return this.http.get<Anuncio>(`${this.apiUrl}/anuncio?id=${idAnuncio}`);
   }
 }

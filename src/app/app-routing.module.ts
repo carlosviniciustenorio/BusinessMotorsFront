@@ -8,10 +8,11 @@ import { AnuncioComponent } from './components/anuncio/anuncio.component';
 
 const routes: Routes = [
 { path: '', redirectTo: 'home', pathMatch: 'full' },
-{ path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+{ path: 'home', component: HomeComponent},
 { path: 'login', component: LoginComponent },
-{ path: 'anuncios', component: AnunciosComponent, canActivate: [AuthGuardService]},
-{ path: 'anuncio/:id', component: AnuncioComponent , canActivate: [AuthGuardService]}
+{ path: 'anuncios', component: AnunciosComponent},
+{ path: 'anuncio/:id', component: AnuncioComponent}
+// { path: 'anuncio/:id', component: AnuncioComponent , canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
