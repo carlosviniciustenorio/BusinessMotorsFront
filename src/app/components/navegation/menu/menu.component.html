@@ -5,18 +5,21 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive" *ngIf="isAuthenticated">
-        <ul class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoginPage()">
           <li class="nav-item">
-            <a class="nav-link"  [routerLink]="['/anuncios']">Anúncios</a>
+            <a class="nav-link" [routerLink]="['/anuncios']">Anúncios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  [routerLink]="['/sobre']">Sobre</a>
+            <a class="nav-link" [routerLink]="['/anuncios/new']">Cadastrar Anúncio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  [routerLink]="['/contato']">Contato</a>
+            <a class="nav-link" [routerLink]="['/contato']">Contato</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/sobre']">Sobre</a>
+          </li>
+          <li class="nav-item" *ngIf="isAuthenticated">
             <a class="nav-link"  (click)="logout()">Logout</a>
           </li>
         </ul>

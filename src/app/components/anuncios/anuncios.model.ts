@@ -10,7 +10,9 @@ export class Anuncios {
       public usuarioId: string,
       public exibirTelefone: boolean,
       public exibirEmail: boolean,
-      public imagem: Imagem
+      public imagem: Imagem,
+      public anoFabricacao: number,
+      public anoVeiculo: number
     ) {}
   }
   
@@ -18,10 +20,8 @@ export class Anuncios {
     constructor(
       public id: number,
       public descricao: string,
-      public anoModelo: number,
-      public anoFabricacao: number,
       public marca: Marca,
-      public versao: Versao
+      public versoes: Versao[]
     ) {}
   }
   
