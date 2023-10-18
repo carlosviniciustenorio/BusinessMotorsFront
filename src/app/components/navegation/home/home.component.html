@@ -1,0 +1,18 @@
+<section class="hero">
+    <div class="hero-content">
+        <h1>Encontre o Carro dos Seus Sonhos</h1>
+        <p>Explore nossa incrível seleção de carros usados e novos.</p>
+        <a [routerLink]="['/anuncios']" class="btn">Ver Anúncios</a>
+    </div>
+</section>
+
+<section class="featured-cars">
+    <h2>Carros em Destaque</h2>
+    <div class="car-list">
+        <div class="car-card" *ngFor="let anuncio of anuncios" (click)="navigateToAnuncio(anuncio.id)">
+            <img src="{{anuncio.imagem.arn}}" alt="Carro em Destaque">
+            <h3>{{anuncio.modelo.descricao}}</h3>
+            <p>Ano: {{anuncio.anoFabricacao}}/{{anuncio.anoVeiculo}}</p>
+        </div>
+    </div>
+</section>
