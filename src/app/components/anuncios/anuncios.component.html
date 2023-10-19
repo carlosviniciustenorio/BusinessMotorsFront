@@ -5,9 +5,9 @@
         <img src="{{anuncio.imagem.arn}}" alt="Imagem do Anúncio" class="card-img">
         <div class="card-body">
           <h5 class="card-title">{{ anuncio.modelo.descricao }}</h5>
-          <!-- <p class="card-text">Versão: {{ anuncio.modelo.versoes[0].descricao}}</p> -->
-          <p class="card-text">Ano: {{ anuncio.anoFabricacao }}/{{anuncio.anoVeiculo}}</p>
           <p class="card-text">Preço: {{ anuncio.preco | currency:'BRL':true:'1.2-2':'pt' }}</p>
+          <p class="card-text">Câmbio: {{ anuncio.cambio }}</p>
+          <p class="card-text">Ano: {{ anuncio.anoFabricacao }}/{{anuncio.anoVeiculo}}</p>
           <p class="card-text">Estado: {{ anuncio.estado }}</p>
         </div>
         <div class="card-footer">
