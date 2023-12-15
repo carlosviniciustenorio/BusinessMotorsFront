@@ -4,13 +4,15 @@
         <img src="{{anuncio.imagens[0].arn}}" alt="Carro" class="img-fluid">
       </div>
       <div class="col-md-6">
-        <h2>{{ anuncio.modelo.descricao }}</h2>
-        <p>Marca: {{ anuncio.modelo.marca.descricao }}</p>
-        <p>Ano: {{ anuncio.anoVeiculo }}</p>
+        <h2>{{ anuncio.modelo?.descricao }}</h2>
+        <p>Marca: {{ anuncio.modelo?.marca?.descricao }}</p>
         <p>Preço: R$ {{ anuncio.preco | number:'1.2-2' }}</p>
         <p>Kilometragem: {{ anuncio.km }} KM</p>
+        <p>Ano: {{ anuncio.anoFabricacao }}/{{ anuncio.anoVeiculo }}</p>
+        <p>Versão: {{ anuncio.modelo.versoes[0]?.descricao }}</p>
+        <p>Câmbio: {{ anuncio.cambio }}</p>
+        <p>Combustivel: {{ anuncio.tiposCombustiveis[0]?.descricao }}</p>
         <p>Estado: {{ anuncio.estado }}</p>
-        <p>Versão: {{ anuncio.modelo.versao.descricao }}</p>
   
         <!-- Botão de ação -->
         <!-- <button class="btn btn-primary" (click)="mostrarContato()">Mostrar Contato</button> -->

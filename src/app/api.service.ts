@@ -23,4 +23,8 @@ export class ApiService {
     return this.http.get<Anuncio>(`${this.apiUrl}/anuncios?id=${idAnuncio}`);
   }
 
+  postAnuncio(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/anuncios`, formData);
+  }
+
 }

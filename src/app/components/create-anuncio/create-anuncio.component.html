@@ -1,0 +1,96 @@
+<div class="container mt-5" id="navigation">
+    <form [formGroup]="anuncioForm" (ngSubmit)="onSubmit()" class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label" for="idModelo">Modelo:</label>
+            <input type="text" id="idModelo" class="form-control" formControlName="idModelo" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="idVersao">Versao:</label>
+            <input type="text" id="idVersao" class="form-control" formControlName="idVersao" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="placa">Placa:</label>
+            <input type="text" id="placa" class="form-control" formControlName="placa" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="idTiposCombustiveis">Tipos Combustiveis:</label>
+            <input type="text" id="idTiposCombustiveis" class="form-control" formControlName="idTiposCombustiveis"
+                required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="portas">Portas:</label>
+            <input type="text" id="portas" class="form-control" formControlName="portas" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="cambio">Cambio:</label>
+            <input type="text" id="cambio" class="form-control" formControlName="cambio" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="cor">Cor:</label>
+            <input type="text" id="cor" class="form-control" formControlName="cor" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="idOpcionais">Opcionais:</label>
+            <input type="text" id="idOpcionais" class="form-control" formControlName="idOpcionais" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="idCaracteristicas">Caracteristicas:</label>
+            <input type="text" id="idCaracteristicas" class="form-control" formControlName="idCaracteristicas" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="km">Quilometragem:</label>
+            <input type="text" id="km" class="form-control" formControlName="km" required>
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label" for="estado">Estado:</label>
+            <input type="text" id="estado" class="form-control" formControlName="estado" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="preco">Preco:</label>
+            <input type="text" id="preco" class="form-control" formControlName="preco" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label" for="anoFabricacao">Ano de Fabricacao:</label>
+            <input type="text" id="anoFabricacao" class="form-control" formControlName="anoFabricacao" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label" for="anoVeiculo">Ano do Veiculo:</label>
+            <input type="text" id="anoVeiculo" class="form-control" formControlName="anoVeiculo" required>
+        </div>
+
+        <div class="col-6">
+            <div class="form-check">
+                <input type="checkbox" id="exibirTelefone" class="form-check-input" formControlName="exibirTelefone">
+                <label class="form-check-label" for="exibirTelefone">Exibir Telefone</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" id="exibirEmail" class="form-check-input" formControlName="exibirEmail">
+                <label class="form-check-label" for="exibirEmail">Exibir Email</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" for="files">Fotos:</label>
+            <input type="file" id="files" class="form-control-file" formControlName="files" accept=".jpg, .jpeg, .png"
+                required>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary" [disabled]="anuncioForm.invalid">Submit</button>
+        </div>
+    </form>
+</div>
