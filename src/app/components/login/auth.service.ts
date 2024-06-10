@@ -56,9 +56,11 @@ export class AuthService {
         this.isAuthenticated = true;
         return true;
       } else {
+        this.isAuthenticated = false;
         return false;
       }
     } else {
+      this.isAuthenticated = false;
       return false;
     }
   }
