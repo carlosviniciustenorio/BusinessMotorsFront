@@ -1,13 +1,28 @@
 <div class="container mt-5" id="navigation">
     <form [formGroup]="anuncioForm" (ngSubmit)="onSubmit()" class="row g-3">
+        
+        <div class="col-md-6">
+            <label class="form-label" for="idMarca">Marca:</label>
+            <input type="text" id="idMarca" class="form-control" [value]="marca?.descricao" (focus)="onFocus()">
+            <ul *ngIf="marcas.length > 0" class="suggestions">
+              <li *ngFor="let marca of marcas" (click)="selectMarca(marca)">{{ marca.descricao }}</li>
+            </ul>
+        </div>          
+          
         <div class="col-md-6">
             <label class="form-label" for="idModelo">Modelo:</label>
-            <input type="text" id="idModelo" class="form-control" formControlName="idModelo" required>
+            <select id="idModelo" class="form-control" formControlName="idModelo" [disabled]="!marca" (change)="onModeloChange($event)">
+                <option value="">Selecione um modelo</option>
+                <option *ngFor="let modelo of modelos" [value]="modelo.id">{{ modelo.descricao }}</option>
+            </select>
         </div>
 
         <div class="col-md-6">
             <label class="form-label" for="idVersao">Versao:</label>
-            <input type="text" id="idVersao" class="form-control" formControlName="idVersao" required>
+            <select id="idVersao" class="form-control" formControlName="idVersao" [disabled]="!modelos[0]" (change)="onVersaoChange($event)">
+                <option value="">Selecione uma Versão</option>
+                <option *ngFor="let versao of versoes" [value]="versao.id">{{ versao.descricao }}</option>
+            </select>
         </div>
 
         <div class="col-md-6">

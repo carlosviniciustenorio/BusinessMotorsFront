@@ -10,6 +10,13 @@ import { ApiService } from 'src/app/api.service';
 })
 export class CreateAnuncioComponent {
   anuncioForm: FormGroup;
+  marcas: any[] = [];
+  marca: any | null = null;
+  modelos: any[] = [];
+  versoes: any[] = [];
+  tiposCombustiveis: any[] = [];
+  opcionais: any[] = [];
+  caracteristicas: any[] = [];
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router) {
     this.anuncioForm = this.fb.group({
@@ -40,5 +47,84 @@ export class CreateAnuncioComponent {
     });
 
     await this.apiService.postAnuncio(formData);
+  }
+
+  getModelos(idMarca: number) {
+    this.apiService.getModelosByMarca(0,10,idMarca)
+    .subscribe(
+      (response) => {
+        this.modelos = response;
+      },
+      (error) => {
+        console.error('Erro ao buscar modelos:', error);
+      }
+    );
+  }
+
+  onModeloChange(event: any) {
+    const idModelo = event.target.value;
+    this.anuncioForm.patchValue({ idModelo });
+    const modeloSelecionado = this.modelos.find(m => m.id === Number(idModelo));
+    this.versoes = modeloSelecionado ? modeloSelecionado.versoes : [];
+  }
+
+  onVersaoChange(event: any){
+    const idVersao = event.target.value;
+    this.anuncioForm.patchValue({ idVersao });
+    this.getTiposCombustiveis();
+    this.getCaracteristicas();
+    this.getOpcionais();
+  }
+
+  onFocus() {
+    this.getMarcas();
+  }
+
+  getMarcas() {
+      this.apiService.getMarcas(0,50)
+      .subscribe(
+        (response) => {
+          this.marcas = response;
+        },
+        (error) => {
+          console.error('Erro ao buscar marcas:', error);
+        }
+      );
+    }
+
+  selectMarca(marca: any) {
+    this.marca = marca;
+    this.marcas = [];
+    this.getModelos(this.marca.id);
+  }
+
+  getOpcionais(){
+    this.apiService.getOpcionais(0, 100)
+    .subscribe((response) => {
+      this.opcionais = response;
+    },
+    (error) => {
+      console.error('Erro ao buscar opcionais:', error);
+    })
+  }
+
+  getTiposCombustiveis(){
+    this.apiService.getTiposCombustiveis(0, 100)
+    .subscribe((response) => {
+      this.tiposCombustiveis = response;
+    },
+    (error) => {
+      console.error('Erro ao buscar tipos de combustiveis:', error);
+    })
+  }
+
+  getCaracteristicas(){
+    this.apiService.getCaracteristicas(0, 100)
+    .subscribe((response) => {
+      this.caracteristicas = response;
+    },
+    (error) => {
+      console.error('Erro ao buscar características:', error);
+    })
   }
 }

@@ -25,6 +25,7 @@ import { _anunciosReducer } from './components/anuncios/store/anuncios.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
 import { CreateAnuncioComponent } from './components/create-anuncio/create-anuncio.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CreateAnuncioComponent } from './components/create-anuncio/create-anunc
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthService,
