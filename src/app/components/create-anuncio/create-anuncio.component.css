@@ -19,3 +19,69 @@
 .suggestions li:hover {
   background-color: #f0f0f0;
 }
+
+.file-upload-wrapper {
+  position: relative;
+  border: 2px dashed #007bff;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.file-upload-wrapper:hover {
+  background-color: #f8f9fa;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: #007bff;
+}
+
+.upload-area p {
+  margin: 10px 0 0;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.image-item {
+  position: relative;
+  margin: 10px;
+}
+
+.image-item img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 0, 0, 0.7);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

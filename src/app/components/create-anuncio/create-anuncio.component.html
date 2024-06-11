@@ -119,19 +119,31 @@
       <div class="col-md-6 mt-3">
       </div>
 
-      <div class="col-md-6 mt-3">
+      <div class="col-md-12 mt-3">
         <label class="form-label" for="files">Fotos:</label>
-        <input type="file" id="files" class="form-control-file" (change)="onFilesSelected($event)" accept=".jpg, .jpeg, .png" multiple>
-        <div class="mt-2">
-          <ul>
-            <li *ngFor="let file of selectedFiles; let i = index">
-              {{ file.name }}
-              <button type="button" (click)="removeFile(i)" class="btn btn-sm btn-danger">Remover</button>
-            </li>
-          </ul>
+        <div class="file-upload-wrapper" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+          <input type="file" id="files" class="form-control-file" (change)="onFilesSelected($event)" accept=".jpg, .jpeg, .png" multiple [disabled]="selectedFiles.length >= 8">
+          <div class="upload-area">
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <p>Arraste suas imagens aqui ou clique para selecionar</p>
+          </div>
+        </div>
+        <div class="image-preview mt-3">
+          <div class="image-item" *ngFor="let file of selectedFiles; let i = index">
+            <img [src]="getImagePreview(file)" class="img-thumbnail" />
+            <button type="button" (click)="removeFile(i)" class="btn btn-sm btn-danger remove-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="selectedFiles.length >= 8" class="alert alert-warning mt-2" role="alert">
+          Você atingiu o limite máximo de 8 imagens.
         </div>
       </div>
       
+      <div *ngIf="error" class="alert alert-danger mt-2" role="alert">
+        <p *ngFor="let erro of error.erros">{{erro}}</p>
+      </div>
   
       <div class="col-12 mt-3">
         <button type="submit" class="btn btn-primary" [disabled]="anuncioForm.invalid">Cadastrar</button>

@@ -36,6 +36,7 @@ export class CreateAnuncioComponent {
   cores: string[] = Object.keys(Cor).map(key => Cor[key as keyof typeof Cor]);
   cambios: string[] = Object.keys(Cambio).map(key => Cambio[key as keyof typeof Cambio]);
   selectedFiles: File[] = [];
+  error: any;
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router) {
     this.anuncioForm = this.fb.group({
@@ -74,9 +75,11 @@ export class CreateAnuncioComponent {
 
       try {
         await this.apiService.postAnuncio(formData).toPromise();
-        console.log('Anúncio enviado com sucesso!');
+        console.log('Anúncio cadastrado com sucesso!');
+        this.router.navigate(['/anuncios'])
       } catch (error) {
         console.error('Erro ao enviar anúncio:', error);
+        this.error = error;
       }
     } else {
       console.log('Formulário inválido. Verifique os campos.');
@@ -104,6 +107,10 @@ export class CreateAnuncioComponent {
 
   onFilesSelected(event: any) {
     const files: FileList = event.target.files;
+    if (this.selectedFiles.length + files.length > 8) {
+      alert('Você só pode adicionar até 8 imagens.');
+      return;
+    }
     this.selectedFiles.push(...Array.from(files));
     this.anuncioForm.patchValue({ files: this.selectedFiles });
   }
@@ -111,6 +118,23 @@ export class CreateAnuncioComponent {
   removeFile(index: number) {
     this.selectedFiles.splice(index, 1);
     this.anuncioForm.patchValue({ files: this.selectedFiles });
+  }
+
+  getImagePreview(file: File): string {
+    return URL.createObjectURL(file);
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files = event.dataTransfer?.files;
+    if (files) {
+      this.selectedFiles.push(...Array.from(files));
+      this.anuncioForm.patchValue({ files: this.selectedFiles });
+    }
   }
 
   onVersaoChange(event: any) {
