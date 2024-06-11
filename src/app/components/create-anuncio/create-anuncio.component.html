@@ -1,111 +1,140 @@
 <div class="container mt-5" id="navigation">
     <form [formGroup]="anuncioForm" (ngSubmit)="onSubmit()" class="row g-3">
-        
-        <div class="col-md-6">
-            <label class="form-label" for="idMarca">Marca:</label>
-            <input type="text" id="idMarca" class="form-control" [value]="marca?.descricao" (focus)="onFocus()">
-            <ul *ngIf="marcas.length > 0" class="suggestions">
-              <li *ngFor="let marca of marcas" (click)="selectMarca(marca)">{{ marca.descricao }}</li>
-            </ul>
-        </div>          
-          
-        <div class="col-md-6">
-            <label class="form-label" for="idModelo">Modelo:</label>
-            <select id="idModelo" class="form-control" formControlName="idModelo" [disabled]="!marca" (change)="onModeloChange($event)">
-                <option value="">Selecione um modelo</option>
-                <option *ngFor="let modelo of modelos" [value]="modelo.id">{{ modelo.descricao }}</option>
-            </select>
-        </div>
+  
+      <div class="col-md-6 position-relative">
+        <label class="form-label" for="idMarca">Marca:</label>
+        <input type="text" id="idMarca" class="form-control" [value]="marca?.descricao" (focus)="onFocus()">
+        <ul *ngIf="marcas.length > 0" class="suggestions">
+          <li *ngFor="let marca of marcas" (click)="selectMarca(marca)">{{ marca.descricao }}</li>
+        </ul>
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label" for="idModelo">Modelo:</label>
+        <select id="idModelo" class="form-control" formControlName="idModelo" [disabled]="!marca" (change)="onModeloChange($event)">
+          <option value="">Selecione um modelo</option>
+          <option *ngFor="let modelo of modelos" [value]="modelo.id">{{ modelo.descricao }}</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6 mt-3">
+        <label class="form-label" for="idVersao">Versão:</label>
+        <select id="idVersao" class="form-control" formControlName="idVersao" [disabled]="!modelos[0]" (change)="onVersaoChange($event)">
+          <option value="">Selecione uma versão</option>
+          <option *ngFor="let versao of versoes" [value]="versao.id">{{ versao.descricao }}</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6 mt-3">
+        <label class="form-label" for="placa">Placa:</label>
+        <input type="text" id="placa" maxlength="7" placeholder="TTT8I88" class="form-control" formControlName="placa" required>
+      </div>
+  
+      <div class="col-md-6 mt-3">
+        <label class="form-label" for="portas">Portas:</label>
+        <input type="number" id="portas" max="8" class="form-control" formControlName="portas"  required>
+      </div>
+  
+      
+      <div class="col-md-6 mt-3">
+        <label class="form-label">Cor:</label>
+        <select class="form-control" formControlName="cor">
+            <option *ngFor="let cor of cores" [value]="cor">{{ cor }}</option>
+        </select>
+      </div>
 
-        <div class="col-md-6">
-            <label class="form-label" for="idVersao">Versao:</label>
-            <select id="idVersao" class="form-control" formControlName="idVersao" [disabled]="!modelos[0]" (change)="onVersaoChange($event)">
-                <option value="">Selecione uma Versão</option>
-                <option *ngFor="let versao of versoes" [value]="versao.id">{{ versao.descricao }}</option>
-            </select>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="placa">Placa:</label>
-            <input type="text" id="placa" class="form-control" formControlName="placa" required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="idTiposCombustiveis">Tipos Combustiveis:</label>
-            <input type="text" id="idTiposCombustiveis" class="form-control" formControlName="idTiposCombustiveis"
-                required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="portas">Portas:</label>
-            <input type="text" id="portas" class="form-control" formControlName="portas" required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="cambio">Cambio:</label>
-            <input type="text" id="cambio" class="form-control" formControlName="cambio" required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="cor">Cor:</label>
-            <input type="text" id="cor" class="form-control" formControlName="cor" required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="idOpcionais">Opcionais:</label>
-            <input type="text" id="idOpcionais" class="form-control" formControlName="idOpcionais" required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="idCaracteristicas">Caracteristicas:</label>
-            <input type="text" id="idCaracteristicas" class="form-control" formControlName="idCaracteristicas" required>
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label" for="km">Quilometragem:</label>
-            <input type="text" id="km" class="form-control" formControlName="km" required>
-        </div>
-
-        <div class="col-md-2">
-            <label class="form-label" for="estado">Estado:</label>
-            <input type="text" id="estado" class="form-control" formControlName="estado" required>
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label" for="preco">Preco:</label>
-            <input type="text" id="preco" class="form-control" formControlName="preco" required>
-        </div>
-
-        <div class="col-md-3">
-            <label class="form-label" for="anoFabricacao">Ano de Fabricacao:</label>
-            <input type="text" id="anoFabricacao" class="form-control" formControlName="anoFabricacao" required>
-        </div>
-
-        <div class="col-md-3">
-            <label class="form-label" for="anoVeiculo">Ano do Veiculo:</label>
-            <input type="text" id="anoVeiculo" class="form-control" formControlName="anoVeiculo" required>
-        </div>
-
-        <div class="col-6">
-            <div class="form-check">
-                <input type="checkbox" id="exibirTelefone" class="form-check-input" formControlName="exibirTelefone">
-                <label class="form-check-label" for="exibirTelefone">Exibir Telefone</label>
+      <div class="col-md-6 mt-3">
+        <label class="form-label">Câmbio:</label>
+        <select class="form-control" formControlName="cambio">
+            <option *ngFor="let tipo of cambios" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6 mt-3">
+        <label class="form-label" for="km">Quilometragem:</label>
+        <input type="text" id="km" class="form-control" formControlName="km" required>
+      </div>
+  
+      <div class="col-md-2 mt-3">
+        <label class="form-label" for="estado">Estado:</label>
+        <input type="text" id="estado" placeholder="RJ" maxlength="2" class="form-control" formControlName="estado" required>
+      </div>
+  
+      <div class="col-md-4 mt-3">
+        <label class="form-label" for="preco">Preço:</label>
+        <input type="number" id="preco" class="form-control" formControlName="preco" required step="0.01">
+      </div>
+  
+      <div class="col-md-3 mt-3">
+        <label class="form-label" for="anoFabricacao">Ano de Fabricação:</label>
+        <input type="text" id="anoFabricacao" class="form-control" formControlName="anoFabricacao" required>
+      </div>
+  
+      <div class="col-md-3 mt-3">
+        <label class="form-label" for="anoVeiculo">Ano do Veículo:</label>
+        <input type="text" id="anoVeiculo" class="form-control" formControlName="anoVeiculo" required>
+      </div>
+  
+      <div class="col-md-12 mt-3">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="form-label">Tipos de Combustível:</label>
+            <div *ngFor="let tipo of tiposCombustiveis" class="form-check">
+              <input type="checkbox" class="form-check-input" [value]="tipo.id" (change)="onTiposCombustiveisChange($event)">
+              <label class="form-check-label">{{ tipo.descricao }}</label>
             </div>
-
-            <div class="form-check">
-                <input type="checkbox" id="exibirEmail" class="form-check-input" formControlName="exibirEmail">
-                <label class="form-check-label" for="exibirEmail">Exibir Email</label>
+          </div>
+  
+          <div class="col-md-4">
+            <label class="form-label">Opcionais:</label>
+            <div *ngFor="let opcional of opcionais" class="form-check">
+              <input type="checkbox" class="form-check-input" [value]="opcional.id" (change)="onOpcionaisChange($event)">
+              <label class="form-check-label">{{ opcional.descricao }}</label>
             </div>
+          </div>
+  
+          <div class="col-md-4">
+            <label class="form-label">Características:</label>
+            <div *ngFor="let caracteristica of caracteristicas" class="form-check">
+              <input type="checkbox" class="form-check-input" [value]="caracteristica.id" (change)="onCaracteristicasChange($event)">
+              <label class="form-check-label">{{ caracteristica.descricao }}</label>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="col-md-6">
-            <label class="form-label" for="files">Fotos:</label>
-            <input type="file" id="files" class="form-control-file" formControlName="files" accept=".jpg, .jpeg, .png"
-                required>
+      <div class="col-6 mt-3">
+        <label class="form-label">Permissões:</label>
+        <div class="form-check">
+          <input type="checkbox" id="exibirTelefone" class="form-check-input" formControlName="exibirTelefone">
+          <label class="form-check-label" for="exibirTelefone">Exibir Telefone</label>
         </div>
+  
+        <div class="form-check mt-2">
+          <input type="checkbox" id="exibirEmail" class="form-check-input" formControlName="exibirEmail">
+          <label class="form-check-label" for="exibirEmail">Exibir Email</label>
+        </div>
+      </div>
+  
+      <div class="col-md-6 mt-3">
+      </div>
 
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary" [disabled]="anuncioForm.invalid">Submit</button>
+      <div class="col-md-6 mt-3">
+        <label class="form-label" for="files">Fotos:</label>
+        <input type="file" id="files" class="form-control-file" (change)="onFilesSelected($event)" accept=".jpg, .jpeg, .png" multiple>
+        <div class="mt-2">
+          <ul>
+            <li *ngFor="let file of selectedFiles; let i = index">
+              {{ file.name }}
+              <button type="button" (click)="removeFile(i)" class="btn btn-sm btn-danger">Remover</button>
+            </li>
+          </ul>
         </div>
+      </div>
+      
+  
+      <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-primary" [disabled]="anuncioForm.invalid">Cadastrar</button>
+      </div>
     </form>
-</div>
+  </div>
