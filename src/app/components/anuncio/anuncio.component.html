@@ -1,22 +1,35 @@
-<div class="container mt-5" id="navigation">
-    <div class="row">
-      <div class="col-md-6">
-        <img src="{{anuncio.imagens[0].arn}}" alt="Carro" class="img-fluid">
-      </div>
-      <div class="col-md-6">
-        <h2>{{ anuncio.modelo?.descricao }}</h2>
-        <p>Marca: {{ anuncio.modelo?.marca?.descricao }}</p>
-        <p>Preço: R$ {{ anuncio.preco | number:'1.2-2' }}</p>
-        <p>Kilometragem: {{ anuncio.km }} KM</p>
-        <p>Ano: {{ anuncio.anoFabricacao }}/{{ anuncio.anoVeiculo }}</p>
-        <p>Versão: {{ anuncio.modelo.versoes[0]?.descricao }}</p>
-        <p>Câmbio: {{ anuncio.cambio }}</p>
-        <p>Combustivel: {{ anuncio.tiposCombustiveis[0]?.descricao }}</p>
-        <p>Estado: {{ anuncio.estado }}</p>
-  
-        <!-- Botão de ação -->
-        <!-- <button class="btn btn-primary" (click)="mostrarContato()">Mostrar Contato</button> -->
-      </div>
+<div class="container mt-5" id="navigation" *ngIf="anuncio">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-tab-group>
+        <mat-tab *ngFor="let imagem of anuncio?.imagens">
+          <ng-template mat-tab-label>
+            <img [src]="imagem.arn" alt="Thumbnail" class="thumbnail-img">
+          </ng-template>
+          <img [src]="imagem.arn" alt="Carro" class="d-block w-100">
+        </mat-tab>
+      </mat-tab-group>
     </div>
+    <div class="col-md-6">
+      <mat-card class="anuncio-card">
+        <mat-card-header>
+          <mat-card-title>{{ anuncio?.modelo?.descricao }}</mat-card-title>
+          <mat-card-subtitle>{{ anuncio?.modelo?.marca?.descricao }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Preço:</strong> R$ {{ anuncio?.preco | number:'1.2-2' }}</p>
+          <p><strong>Kilometragem:</strong> {{ anuncio?.km }} KM</p>
+          <p><strong>Ano:</strong> {{ anuncio?.anoFabricacao }}/{{ anuncio?.anoVeiculo }}</p>
+          <p><strong>Versão:</strong> {{ anuncio.modelo.versoes[0]?.descricao }}</p>
+          <p><strong>Câmbio:</strong> {{ anuncio?.cambio }}</p>
+          <p><strong>Combustível:</strong> {{ anuncio.tiposCombustiveis[0]?.descricao }}</p>
+          <p><strong>Estado:</strong> {{ anuncio?.estado }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="showContact()">Contatar Vendedor</button>
+          <!-- <p>{{}}</p> -->
+        </mat-card-actions>
+      </mat-card>
+    </div>    
   </div>
-  
+</div>

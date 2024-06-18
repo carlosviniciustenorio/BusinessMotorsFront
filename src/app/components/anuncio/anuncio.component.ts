@@ -29,4 +29,8 @@ export class AnuncioComponent implements OnInit{
     });
   }
 
+  showContact(){
+    
+  }
+
 }

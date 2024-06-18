@@ -26,6 +26,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
 import { CreateAnuncioComponent } from './components/create-anuncio/create-anuncio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [
     AuthService,
