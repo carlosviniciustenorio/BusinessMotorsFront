@@ -13,7 +13,8 @@ export class Anuncio {
       public anoFabricacao: number,
       public anoVeiculo: number,
       public tiposCombustiveis: TipoCombustivel[],
-      public imagens: Imagem[]
+      public imagens: Imagem[],
+      public telefone: string
     ) {}
   }
   

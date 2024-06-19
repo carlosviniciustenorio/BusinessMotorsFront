@@ -16,10 +16,16 @@ export class AnuncioComponent implements OnInit{
     this.route.params.subscribe(params => {
       const idAnuncio = params['id'];
       
-      // Chama o método getAnuncio para obter os detalhes do anúncio
       this.apiService.getAnuncio(idAnuncio).subscribe(
         (data: Anuncio) => {
           this.anuncio = data;
+          this.apiService.getTelefoneUsuario(this.anuncio.usuarioId).subscribe(
+            (data: any) => {
+              this.anuncio.telefone = data.telefone
+            },
+            (error) => {
+              console.log(error);
+            });
         },
         (error) => {
           console.log(error);
@@ -28,9 +34,4 @@ export class AnuncioComponent implements OnInit{
       );
     });
   }
-
-  showContact(){
-    
-  }
-
 }

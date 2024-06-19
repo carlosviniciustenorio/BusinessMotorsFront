@@ -5,7 +5,7 @@ import { ApiService } from 'src/app/api.service';
 
 enum Cambio {
   Manual = 'Manual',
-  Automatico = 'Automático',
+  Automatico = 'Automatico',
   Automatizado = 'Automatizado'
 }
 

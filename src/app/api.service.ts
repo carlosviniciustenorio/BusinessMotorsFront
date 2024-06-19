@@ -9,7 +9,7 @@ import { Anuncio } from './components/anuncio/anuncio.model';
 })
 export class ApiService {
   private apiUrl = 'http://localhost:8000/api';
-  private controllers = ["anuncios", "modelos","marcas","tiposCombustiveis","opcionais","caracteristicas"]
+  private controllers = ["anuncios", "modelos","marcas","tiposCombustiveis","opcionais","caracteristicas","usuarios"]
   
   constructor(private http: HttpClient, private authService: AuthService) {}
   
@@ -53,6 +53,12 @@ export class ApiService {
 
   getCaracteristicas(skip: number, take: number): Observable<any>{
     return this.http.get(`${this.apiUrl}/${this.controllers[5]}?take=${take}&skip=${skip}`,{
+      headers: this.getHeaders()
+    });
+  }
+
+  getTelefoneUsuario(id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/${this.controllers[6]}/${id}/phone`,{
       headers: this.getHeaders()
     });
   }
