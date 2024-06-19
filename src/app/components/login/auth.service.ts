@@ -20,7 +20,6 @@ export class AuthService {
       .pipe(
         tap((response: AuthResponse) => {
           if (response.sucesso) {
-            debugger;
             localStorage.setItem('accessToken', response.accessToken);
             localStorage.setItem('refreshToken', response.refreshToken);
             this.loginEvent.next();

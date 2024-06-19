@@ -62,28 +62,53 @@ export class CreateAnuncioComponent {
 
   async onSubmit() {
     if (this.anuncioForm.valid) {
-      const formData = new FormData();
-      Object.keys(this.anuncioForm.value).forEach(key => {
-        if (key !== 'files') {
-          formData.append(key, this.anuncioForm.value[key]);
-        }
-      });
-  
-      this.selectedFiles.forEach(file => {
-        formData.append('files', file, file.name);
-      });
+        const formData = new FormData();
 
-      try {
-        await this.apiService.postAnuncio(formData).toPromise();
-        console.log('Anúncio cadastrado com sucesso!');
-        this.router.navigate(['/anuncios'])
-      } catch (error) {
-        console.error('Erro ao enviar anúncio:', error);
-        this.error = error;
-      }
+        Object.keys(this.anuncioForm.value).forEach(key => {
+            const value = this.anuncioForm.value[key];
+
+            if (key === 'files') {
+                this.selectedFiles.forEach(file => {
+                    formData.append('files', file, file.name);
+                });
+            } else if (Array.isArray(value)) {
+                value.forEach((item: any) => {
+                    formData.append(key, item);
+                });
+            } else {
+                formData.append(key, value);
+            }
+        });
+
+        try {
+            await this.apiService.postAnuncio(formData).toPromise();
+            console.log('Anúncio cadastrado com sucesso!');
+            this.router.navigate(['/anuncios']);
+        } catch (error) {
+            console.error('Erro ao cadastrar anúncio:', error);
+            this.error = 'Erro ao cadastrar anúncio';
+        }
     } else {
-      console.log('Formulário inválido. Verifique os campos.');
+        console.log('Formulário inválido. Verifique os campos.');
     }
+  }
+
+  transformFormData(formValue: any): any {
+    const formData = new FormData();
+  
+    for (const key in formValue) {
+      if (formValue.hasOwnProperty(key)) {
+        if (Array.isArray(formValue[key])) {
+          formValue[key].forEach((value: any) => {
+            formData.append(key, value);
+          });
+        } else {
+          formData.append(key, formValue[key]);
+        }
+      }
+    }
+  
+    return formData;
   }
 
   getModelos(idMarca: number) {
@@ -233,4 +258,9 @@ export class CreateAnuncioComponent {
           console.error('Erro ao buscar características:', error);
         })
   }
+
+  closeAlert() {
+    this.error = null;
+  }
+  
 }

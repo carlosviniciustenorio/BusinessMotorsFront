@@ -28,6 +28,7 @@ import { CreateAnuncioComponent } from './components/create-anuncio/create-anunc
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -51,13 +52,15 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    NgxMaskDirective
   ],
   providers: [
     AuthService,
     ApiService,
     AuthGuardService,
-    {provide: APP_BASE_HREF, useValue: '/'}
+    {provide: APP_BASE_HREF, useValue: '/'},
+    [provideNgxMask()]
   ],
   bootstrap: [AppComponent]
 })

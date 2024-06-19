@@ -25,6 +25,7 @@
     "@ngrx/store-devtools": "^15.2.0",
     "bootstrap": "^5.3.3",
     "jsonwebtoken": "^9.0.2",
+    "ngx-mask": "^15.0.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
