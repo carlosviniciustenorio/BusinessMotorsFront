@@ -19,13 +19,15 @@ export class AnuncioComponent implements OnInit{
       this.apiService.getAnuncio(idAnuncio).subscribe(
         (data: Anuncio) => {
           this.anuncio = data;
-          this.apiService.getTelefoneUsuario(this.anuncio.usuarioId).subscribe(
-            (data: any) => {
-              this.anuncio.telefone = data.telefone
-            },
-            (error) => {
-              console.log(error);
-            });
+          if(this.anuncio.exibirTelefone){
+            this.apiService.getTelefoneUsuario(this.anuncio.usuarioId).subscribe(
+              (data: any) => {
+                this.anuncio.telefone = data.telefone
+              },
+              (error) => {
+                console.log(error);
+              });
+          }
         },
         (error) => {
           console.log(error);

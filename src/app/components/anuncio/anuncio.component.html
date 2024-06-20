@@ -24,7 +24,7 @@
           <p><strong>Câmbio:</strong> {{ anuncio?.cambio }}</p>
           <p><strong>Combustível:</strong> {{ anuncio.tiposCombustiveis[0]?.descricao }}</p>
           <p><strong>Estado:</strong> {{ anuncio?.estado }}</p>
-          <p *ngIf="anuncio.exibirEmail && anuncio.telefone"><strong>Telefone:</strong> {{ anuncio?.telefone }}</p>
+          <p *ngIf="anuncio.exibirTelefone && anuncio.telefone"><strong>Telefone:</strong> {{ anuncio?.telefone }}</p>
         </mat-card-content>
       </mat-card>
     </div>    
