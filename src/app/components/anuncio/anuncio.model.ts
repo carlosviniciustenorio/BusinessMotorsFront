@@ -14,7 +14,8 @@ export class Anuncio {
       public anoVeiculo: number,
       public tiposCombustiveis: TipoCombustivel[],
       public imagens: Imagem[],
-      public telefone: string
+      public telefone: string,
+      public email: string
     ) {}
   }
   

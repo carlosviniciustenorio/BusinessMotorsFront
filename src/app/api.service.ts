@@ -57,10 +57,8 @@ export class ApiService {
     });
   }
 
-  getTelefoneUsuario(id: string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${this.controllers[6]}/${id}/phone`,{
-      headers: this.getHeaders()
-    });
+  getUsuarioInfo(id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/${this.controllers[6]}/${id}/detalhes`);
   }
 
   private getHeaders(): HttpHeaders {

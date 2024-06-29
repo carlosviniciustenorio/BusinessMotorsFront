@@ -1,6 +1,6 @@
 <div class="container mt-5" id="navigation" *ngIf="anuncio">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-10">
       <mat-tab-group>
         <mat-tab *ngFor="let imagem of anuncio?.imagens">
           <ng-template mat-tab-label>
@@ -10,7 +10,7 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-10">
       <mat-card class="anuncio-card">
         <mat-card-header>
           <mat-card-title>{{ anuncio?.modelo?.descricao }}</mat-card-title>
@@ -25,6 +25,7 @@
           <p><strong>Combustível:</strong> {{ anuncio.tiposCombustiveis[0]?.descricao }}</p>
           <p><strong>Estado:</strong> {{ anuncio?.estado }}</p>
           <p *ngIf="anuncio.exibirTelefone && anuncio.telefone"><strong>Telefone:</strong> {{ anuncio?.telefone }}</p>
+          <p *ngIf="anuncio.exibirEmail && anuncio.email"><strong>E-mail:</strong> {{ anuncio?.email }}</p>
         </mat-card-content>
       </mat-card>
     </div>    
