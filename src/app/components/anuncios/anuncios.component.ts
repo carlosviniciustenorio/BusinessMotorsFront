@@ -98,7 +98,7 @@ export class AnunciosComponent implements OnInit, OnDestroy {
   aplicarFiltros() {
     this.carregarAnuncios();
   }
-
+  
   carregarAnuncios() {
     this.store.dispatch(loadAnuncios({
       skip: 0,
