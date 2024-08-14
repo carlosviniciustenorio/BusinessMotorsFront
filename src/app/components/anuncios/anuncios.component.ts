@@ -98,7 +98,7 @@ export class AnunciosComponent implements OnInit, OnDestroy {
   aplicarFiltros() {
     this.carregarAnuncios();
   }
-  
+
   carregarAnuncios() {
     this.store.dispatch(loadAnuncios({
       skip: 0,
@@ -159,7 +159,6 @@ export class AnunciosComponent implements OnInit, OnDestroy {
     const idModelo = event.target.value;
     const novosFiltros = { ...this.filtros, idModelo: event.target.value };
     this.filtros = novosFiltros;
-    debugger;
     const modeloSelecionado = this.modelos.find(m => m.id === Number(idModelo));
     this.versoes = modeloSelecionado ? modeloSelecionado.versoes : [];
   }
