@@ -1,14 +1,49 @@
 #navigation {
     padding-top: 5%;
-}
-
-.car-card {
-    width: 600px;
+  }
+  
+  .car-card {
+    width: 100%;
+    max-width: 600px;
     height: 500px;
     overflow: hidden;
-}
-
-.card-img {
+  }
+  
+  .card-img {
     width: 100%;
     height: 200px;
-}
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-footer {
+    text-align: center;
+  }
+  
+  .card {
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-title,
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  

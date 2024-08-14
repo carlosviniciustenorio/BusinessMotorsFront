@@ -6,6 +6,7 @@ export class Anuncios {
       public cor: number,
       public km: string,
       public estado: string,
+      public cidade: string,
       public preco: number,
       public usuarioId: string,
       public exibirTelefone: boolean,

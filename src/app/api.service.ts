@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from './components/login/auth.service';
 import { Observable } from 'rxjs';
 import { Anuncio } from './components/anuncio/anuncio.model';
@@ -13,9 +13,20 @@ export class ApiService {
   
   constructor(private http: HttpClient, private authService: AuthService) {}
   
-  getAnuncios(skip: number, take: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${this.controllers[0]}?take=${take}&skip=${skip}`);
-  }
+  getAnuncios(skip: number, take: number, filtros: any = null): Observable<any> {
+    let params = new HttpParams()
+        .set('take', take.toString())
+        .set('skip', skip.toString());
+
+    for (let key in filtros) {
+        if (filtros[key] !== null && filtros[key] !== undefined && filtros[key] !== '') {
+            params = params.set(key, filtros[key]);
+        }
+    }
+
+    return this.http.get(`${this.apiUrl}/${this.controllers[0]}`, { params });
+}
+
 
   getAnuncio(idAnuncio: string): Observable<Anuncio> {
     return this.http.get<Anuncio>(`${this.apiUrl}/${this.controllers[0]}/${idAnuncio}`);

@@ -3,7 +3,7 @@ import { Anuncios } from '../anuncios.model';
 
 export const loadAnuncios = createAction(
     '[Anuncios] Load Anuncios',
-    props<{ skip: number; take: number }>()
+    props<{ skip: number; take: number, filters: any }>()
   );
 export const loadAnunciosSuccess = createAction(
   '[Anuncios] Load Anuncios Success',
