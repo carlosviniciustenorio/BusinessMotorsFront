@@ -27,6 +27,7 @@ enum Cor {
 export class CreateAnuncioComponent {
   anuncioForm: FormGroup;
   marcas: any[] = [];
+  marcasCache: any[] = [];
   marca: any | null = null;
   modelos: any[] = [];
   versoes: any[] = [];
@@ -212,15 +213,20 @@ export class CreateAnuncioComponent {
   }
 
   getMarcas() {
-    this.apiService.getMarcas(0, 50)
-      .subscribe(
-        (response) => {
-          this.marcas = response;
-        },
-        (error) => {
-          console.error('Erro ao buscar marcas:', error);
-        }
-      );
+    if(this.marcasCache.length == 0){
+      this.apiService.getMarcas(0, 50)
+        .subscribe(
+          (response) => {
+            this.marcas = response;
+            this.marcasCache = this.marcas;
+          },
+          (error) => {
+            console.error('Erro ao buscar marcas:', error);
+          }
+        );
+    }else{
+      this.marcas = this.marcasCache;
+    }
   }
 
   selectMarca(marca: any) {
