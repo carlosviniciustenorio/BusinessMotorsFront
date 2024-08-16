@@ -39,33 +39,23 @@ export class ApiService {
   }
 
   getModelosByMarca(skip: number, take: number, id: number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${this.controllers[1]}?take=${take}&skip=${skip}&idMarca=${id}`,{
-      headers: this.getHeaders()
-    });
+    return this.http.get(`${this.apiUrl}/${this.controllers[1]}?take=${take}&skip=${skip}&idMarca=${id}`);
   }
 
   getMarcas(skip: number, take: number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${this.controllers[2]}?take=${take}&skip=${skip}`,{
-      headers: this.getHeaders()
-    });
+    return this.http.get(`${this.apiUrl}/${this.controllers[2]}?take=${take}&skip=${skip}`);
   }
 
   getTiposCombustiveis(skip: number, take: number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${this.controllers[3]}?take=${take}&skip=${skip}`,{
-      headers: this.getHeaders()
-    });
+    return this.http.get(`${this.apiUrl}/${this.controllers[3]}?take=${take}&skip=${skip}`);
   }
 
   getOpcionais(skip: number, take: number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${this.controllers[4]}?take=${take}&skip=${skip}`,{
-      headers: this.getHeaders()
-    });
+    return this.http.get(`${this.apiUrl}/${this.controllers[4]}?take=${take}&skip=${skip}`);
   }
 
   getCaracteristicas(skip: number, take: number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${this.controllers[5]}?take=${take}&skip=${skip}`,{
-      headers: this.getHeaders()
-    });
+    return this.http.get(`${this.apiUrl}/${this.controllers[5]}?take=${take}&skip=${skip}`);
   }
 
   getUsuarioInfo(id: string): Observable<any>{
