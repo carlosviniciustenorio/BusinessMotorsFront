@@ -5,6 +5,7 @@ import { loadAnuncios } from './store/anuncios.actions';
 import { map, take } from 'rxjs/operators';
 import { IAnunciosState } from './store/anuncios.state';
 import { ApiService } from 'src/app/api.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-anuncios',
@@ -96,17 +97,25 @@ export class AnunciosComponent implements OnInit, OnDestroy {
   }
 
   aplicarFiltros() {
-    this.carregarAnuncios();
+    this.loadMoreItems();
   }
 
   carregarAnuncios() {
-    this.store.dispatch(loadAnuncios({
-      skip: 0,
-      take: this.itemsPerPage,
-      filters: this.filtros,
-      ...this.filtros
-    }));
+    this.anuncios$.pipe(
+      take(1),
+      tap((anuncios) => {
+        if (!anuncios || anuncios.length === 0) {
+          this.store.dispatch(loadAnuncios({
+            skip: 0,
+            take: this.itemsPerPage,
+            filters: this.filtros,
+            ...this.filtros
+          }));
+        }
+      })
+    ).subscribe();
   }
+  
 
   carregarMarcas() {
     if (this.marcasCache.length == 0) {
