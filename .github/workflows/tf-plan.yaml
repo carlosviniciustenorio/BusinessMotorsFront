@@ -18,8 +18,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.3.3  # Ou qualquer versão específica que você deseja usar
+
       - name: Terraform Format and Style
-        id: validate
+        id: fmt
         run: terraform fmt -check
 
       - name: Terraform Initialization
@@ -31,11 +36,3 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan -out=plan.tfplan
-
-      - name: Report Terraform Plan Outcome
-        run: |
-          if [[ "${{ steps.plan.outcome }}" == "success" ]]; then
-            echo "Terraform plan was successful"
-          else
-            echo "Terraform plan failed"
-          fi
