@@ -43,25 +43,33 @@ jobs:
       - name: Terraform Plan
         id: plandev
         run: terraform plan -no-color -var-file="config/dev/terraform.tfvars" -lock=false
+        # Captura a saída do terraform plan
+        continue-on-error: true
 
-      - uses: actions/github-script@0.9.0
+      - name: Post Plan as Comment
+        uses: actions/github-script@0.9.0
         if: github.event_name == 'pull_request'
         env:
-          PLAN: "terraform\n${{ steps.plandev.outputs.stdout }}"
+          PLAN: ${{ steps.plandev.outputs.stdout }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = #### Terraform Format and Style 🖌\${{ steps.fmt.outcome }}\
-            #### Terraform Initialization ⚙️\${{ steps.init.outcome }}\
-            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-            #### Terraform Plan 📖\${{ steps.plan.outcome }}\
+            const output = `#### Terraform Format and Style 🖌
+            #### Terraform Initialization ⚙️: success
+            #### Terraform Validation 🤖: ${{
+              steps.validate.outcome === 'success' ? 'Success' : 'Failed'
+            }}
+            #### Terraform Plan 📖:
             <details><summary>Show Plan</summary>
-            \\\${process.env.PLAN}\\\
+            \`\`\`
+            ${process.env.PLAN}
+            \`\`\`
             </details>
-            *Pusher: @${{ github.actor }}, Action: \${{ github.event_name }}\, Working Directory: \${{ env.TF_1_WORKING_DIR }}\, Workflow: \${{ github.workflow }}\*;
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.TF_WORKING_DIR }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: output
-            })
+            });
