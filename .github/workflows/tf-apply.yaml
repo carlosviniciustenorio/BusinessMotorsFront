@@ -65,7 +65,14 @@ jobs:
       - name: Build Angular app
         run: npm run build --prod
 
+      - name: List files in dist folder
+        run: ls -R ./dist
+
       - name: Upload to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
         run: |
           aws s3 sync ./dist/angular-app/ s3://business-motors-app --delete
 
