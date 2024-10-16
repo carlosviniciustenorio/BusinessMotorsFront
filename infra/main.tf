@@ -36,7 +36,7 @@ resource "aws_s3_bucket_ownership_controls" "angular_app_bucket_ownership" {
 }
 
 resource "aws_s3_bucket_public_access_block" "angular_app_bucket_public_access" {
-  bucket = aws_s3_bucket.angular_app_bucket.id
+  bucket = aws_s3_bucket.angular_app_bucket.bucket
 
   block_public_acls       = false
   block_public_policy     = false
