@@ -81,12 +81,10 @@ jobs:
           echo "Listing CloudFront distributions..."
           aws cloudfront list-distributions --output table
           
-          # Busca o ID da distribuição CloudFront associada ao S3 bucket
-          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Origins.Items[0].DomainName == '${{ env.AWS_S3_BUCKET }}'].Id" --output text)
+          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Origins.Items[0].DomainName == 'business-motors-app.s3.amazonaws.com'].Id" --output text)
           
-          # Verifica se a distribuição foi encontrada
           if [ -z "$DISTRIBUTION_ID" ]; then
-            echo "Error: CloudFront distribution not found for S3 bucket '${{ env.AWS_S3_BUCKET }}'."
+            echo "Error: CloudFront distribution not found for S3 bucket 'business-motors-app.s3.amazonaws.com'."
             exit 1
           fi
           
