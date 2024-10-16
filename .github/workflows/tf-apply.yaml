@@ -47,6 +47,7 @@ jobs:
         run: terraform apply -auto-approve -var-file="config/dev/terraform.tfvars" -lock=false
 
   build:
+    needs: apply-infra
     runs-on: ubuntu-latest
 
     steps:
