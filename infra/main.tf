@@ -15,7 +15,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "angular_app_bucket" {
   bucket = "business-motors-app"
-  acl    = "public-read"
+  acl    = "private"
 
   website {
     index_document = "index.html"
@@ -24,6 +24,14 @@ resource "aws_s3_bucket" "angular_app_bucket" {
 
   versioning {
     enabled = true
+  }
+}
+
+resource "aws_s3_bucket_ownership_controls" "angular_app_bucket_ownership" {
+  bucket = aws_s3_bucket.angular_app_bucket.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
