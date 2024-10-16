@@ -10,9 +10,12 @@ export class Anuncio {
       public usuarioId: string,
       public exibirTelefone: boolean,
       public exibirEmail: boolean,
-      public imagens: Imagem[],
       public anoFabricacao: number,
-      public anoVeiculo: number
+      public anoVeiculo: number,
+      public tiposCombustiveis: TipoCombustivel[],
+      public imagens: Imagem[],
+      public telefone: string,
+      public email: string
     ) {}
   }
   
@@ -21,7 +24,7 @@ export class Anuncio {
       public id: number,
       public descricao: string,
       public marca: Marca,
-      public versao: Versao
+      public versoes: Versao[]
     ) {}
   }
   
@@ -33,6 +36,13 @@ export class Anuncio {
   }
   
   export class Versao {
+    constructor(
+      public id: number,
+      public descricao: string
+    ) {}
+  }
+
+  export class TipoCombustivel {
     constructor(
       public id: number,
       public descricao: string

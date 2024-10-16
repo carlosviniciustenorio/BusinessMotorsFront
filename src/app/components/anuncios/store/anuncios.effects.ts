@@ -15,8 +15,8 @@ export class AnunciosEffects {
   loadAnuncios$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromAnunciosActions.loadAnuncios),
-      switchMap(({ skip, take }) =>
-        this.apiService.getAnuncios(skip, take).pipe(
+      switchMap(({ skip, take, filters }) =>
+        this.apiService.getAnuncios(skip, take, filters).pipe(
           map((anuncios) =>
             fromAnunciosActions.loadAnunciosSuccess({ anuncios })
           ),

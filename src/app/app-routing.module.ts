@@ -5,14 +5,15 @@ import { LoginComponent } from './components/login/login.component';
 import { AnunciosComponent } from './components/anuncios/anuncios.component';
 import { AuthGuardService } from './auth-guard.service';
 import { AnuncioComponent } from './components/anuncio/anuncio.component';
+import { CreateAnuncioComponent } from './components/create-anuncio/create-anuncio.component';
 
 const routes: Routes = [
 { path: '', redirectTo: 'home', pathMatch: 'full' },
 { path: 'home', component: HomeComponent},
 { path: 'login', component: LoginComponent },
 { path: 'anuncios', component: AnunciosComponent},
-{ path: 'anuncio/:id', component: AnuncioComponent}
-// { path: 'anuncio/:id', component: AnuncioComponent , canActivate: [AuthGuardService]}
+{ path: 'anuncio/:id', component: AnuncioComponent},
+{ path:'anuncios/create', component: CreateAnuncioComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

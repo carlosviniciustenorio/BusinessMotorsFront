@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as fromAnunciosActions from './anuncios.actions';
 import { IAnunciosState} from './anuncios.state';
 
-export const initialState: IAnunciosState = {anuncios: [], currentPage: 0, isLoading:false};
+export const initialState: IAnunciosState = {anuncios: [], anunciosSize: 0, isLoading:false};
 
 export const _anunciosReducer = createReducer(
   initialState,
@@ -10,6 +10,7 @@ export const _anunciosReducer = createReducer(
   on(fromAnunciosActions.loadAnunciosSuccess, (state, { anuncios }) => ({
     ...state,
     anuncios: [...state.anuncios, ...anuncios],
+    anunciosSize: anuncios.length == 0 ? state.anuncios.length : anuncios.length,
     loading: false,
   })),
   on(fromAnunciosActions.loadAnunciosFailure, (state, { error }) => {

@@ -1,13 +1,13 @@
 <section class="hero">
     <div class="hero-content">
-        <h1>Encontre o Carro dos Seus Sonhos</h1>
-        <p>Explore nossa incrível seleção de carros usados e novos.</p>
+        <h1>Encontre o veículo dos seus sonhos</h1>
+        <p>Explore nossa incrível seleção de veículos.</p>
         <a [routerLink]="['/anuncios']" class="btn">Ver Anúncios</a>
     </div>
 </section>
 
 <section class="featured-cars">
-    <h2>Carros em Destaque</h2>
+    <h2>Anúncios em Destaque</h2>
     <div class="car-list">
         <div class="car-card" *ngFor="let anuncio of anuncios" (click)="navigateToAnuncio(anuncio.id)">
             <img src="{{anuncio.imagem.arn}}" alt="Carro em Destaque">

@@ -1,17 +1,108 @@
 <div class="container mt-5" id="navigation">
   <div class="row">
-    <div class="col-md-4 mb-4 car-card" *ngFor="let anuncio of anuncios$ | async ">
-      <div class="card">
-        <img src="{{anuncio.imagem.arn}}" alt="Imagem do Anúncio" class="card-img">
-        <div class="card-body">
-          <h5 class="card-title">{{ anuncio.modelo.descricao }}</h5>
-          <!-- <p class="card-text">Versão: {{ anuncio.modelo.versoes[0].descricao}}</p> -->
-          <p class="card-text">Ano: {{ anuncio.anoFabricacao }}/{{anuncio.anoVeiculo}}</p>
-          <p class="card-text">Preço: {{ anuncio.preco | currency:'BRL':true:'1.2-2':'pt' }}</p>
-          <p class="card-text">Estado: {{ anuncio.estado }}</p>
+    <div class="col-md-3">
+      <div class="card p-3 mb-4">
+        <h5 class="card-title">Filtrar Anúncios</h5>
+
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input type="text" class="form-control" id="estado" [(ngModel)]="filtros.estado" placeholder="RJ">
         </div>
-        <div class="card-footer">
-          <button class="btn btn-primary btn-block" (click)="navigateToAnuncio(anuncio.id)">Detalhes</button>
+
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input type="text" class="form-control" id="cidade" [(ngModel)]="filtros.cidade" placeholder="Rio de Janeiro">
+        </div>
+
+        <div class="form-group">
+          <label for="precoInicio">Preço Mínimo</label>
+          <input type="number" class="form-control" id="precoInicio" [(ngModel)]="filtros.precoInicio" placeholder="30000">
+        </div>
+
+        <div class="form-group">
+          <label for="precoFim">Preço Máximo</label>
+          <input type="number" class="form-control" id="precoFim" [(ngModel)]="filtros.precoFim" placeholder="139000">
+        </div>
+
+        <div class="form-group">
+          <label for="kmInicio">KM Mínimo</label>
+          <input type="number" class="form-control" id="kmInicio" [(ngModel)]="filtros.kmInicio" placeholder="10000">
+        </div>
+
+        <div class="form-group">
+          <label for="kmFim">KM Máximo</label>
+          <input type="number" class="form-control" id="kmFim" [(ngModel)]="filtros.kmFim" placeholder="50000">
+        </div>
+
+        <div class="form-group">
+          <label for="anoModeloInicio">De</label>
+          <input type="number" class="form-control" id="anoModeloInicio" [(ngModel)]="filtros.anoModeloInicio" placeholder="2020">
+        </div>
+
+        <div class="form-group">
+          <label for="anoModeloFim">Até</label>
+          <input type="number" class="form-control" id="anoModeloFim" [(ngModel)]="filtros.anoModeloFim" placeholder="2024">
+        </div>
+
+        <div class="form-group position-relative">
+          <label for="idMarca">Fabricante</label>
+          <input
+            type="text"
+            id="idMarca"
+            class="form-control"
+            [(ngModel)]="marcaDescricao"
+            (input)="onMarcaInput()"
+            (focus)="onFocus()"
+            placeholder="Selecione o fabricante"
+            autocomplete="off"
+          />
+          <ul *ngIf="marcasFiltradas.length > 0" class="suggestions list-group position-absolute w-100">
+            <li
+              *ngFor="let marca of marcasFiltradas"
+              class="list-group-item list-group-item-action"
+              (click)="selectMarca(marca)"
+            >
+              {{ marca.descricao }}
+            </li>
+          </ul>
+        </div>
+        
+        <div class="form-group">
+          <label for="idModelo">Modelo</label>
+          <select id="idModelo" class="form-control" [disabled]="!marca" (change)="onModeloChange($event)">
+            <option value="">Selecione um modelo</option>
+            <option *ngFor="let modelo of modelos" [value]="modelo.id">{{ modelo.descricao }}</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="idVersao">Versão</label>
+          <select id="idVersao" class="form-control" [disabled]="!modelos[0]" (change)="onVersaoChange($event)">
+            <option value="">Selecione uma versão</option>
+            <option *ngFor="let versao of versoes" [value]="versao.id">{{ versao.descricao }}</option>
+          </select>
+        </div>
+        
+        <button class="btn btn-primary mt-3" (click)="aplicarFiltros()">Aplicar Filtros</button>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-4 mb-4 car-card" *ngFor="let anuncio of anuncios$ | async">
+          <div class="card">
+            <img src="{{ anuncio.imagem.arn }}" alt="Imagem do Anúncio" class="card-img">
+            <div class="card-body">
+              <h5 class="card-title">{{ anuncio.modelo.descricao }}</h5>
+              <p class="card-text">Preço: {{ anuncio.preco | currency:'BRL':true:'1.2-2':'pt' }}</p>
+              <p class="card-text">Câmbio: {{ anuncio.cambio }}</p>
+              <p class="card-text">Ano: {{ anuncio.anoFabricacao }}/{{ anuncio.anoVeiculo }}</p>
+              <p class="card-text">Estado: {{ anuncio.estado }}</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary btn-block" (click)="navigateToAnuncio(anuncio.id)">Detalhes</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

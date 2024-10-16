@@ -12,7 +12,7 @@ import { FooterComponent } from './components/navegation/footer/footer.component
 import { HomeComponent } from './components/navegation/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AnunciosComponent } from './components/anuncios/anuncios.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ApiService } from './api.service';
@@ -24,6 +24,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { _anunciosReducer } from './components/anuncios/store/anuncios.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
+import { CreateAnuncioComponent } from './components/create-anuncio/create-anuncio.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,8 @@ import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
     HomeComponent,
     LoginComponent,
     AnunciosComponent,
-    AnuncioComponent
+    AnuncioComponent,
+    CreateAnuncioComponent
   ],
   imports: [
     BrowserModule,
@@ -41,13 +47,20 @@ import { AnunciosEffects } from './components/anuncios/store/anuncios.effects';
     FormsModule,
     StoreModule.forRoot({ anuncios: _anunciosReducer }),
     EffectsModule.forRoot([AnunciosEffects]),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatCardModule,
+    NgxMaskDirective
   ],
   providers: [
     AuthService,
     ApiService,
     AuthGuardService,
-    {provide: APP_BASE_HREF, useValue: '/'}
+    {provide: APP_BASE_HREF, useValue: '/'},
+    [provideNgxMask()]
   ],
   bootstrap: [AppComponent]
 })

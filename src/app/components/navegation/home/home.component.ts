@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   buscarAnuncios() {
-    this.apiService.getAnuncios(2,3)
+    this.apiService.getAnuncios(0,3)
     .subscribe(
       (response) => {
         this.anuncios = response;
