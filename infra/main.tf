@@ -25,6 +25,8 @@ resource "aws_s3_bucket" "angular_app_bucket" {
   versioning {
     enabled = true
   }
+
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_ownership_controls" "angular_app_bucket_ownership" {
