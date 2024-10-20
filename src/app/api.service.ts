@@ -8,7 +8,7 @@ import { Anuncio } from './components/anuncio/anuncio.model';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = 'http://lb-tf-business-motors-407012790.us-east-1.elb.amazonaws.com/api';
   private controllers = ["anuncios", "modelos","marcas","tiposCombustiveis","opcionais","caracteristicas","usuarios"]
   
   constructor(private http: HttpClient, private authService: AuthService) {}
