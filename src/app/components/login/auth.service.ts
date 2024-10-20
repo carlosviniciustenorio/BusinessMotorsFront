@@ -7,7 +7,7 @@ import { AuthResponse } from './auth.response';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = 'http://lb-tf-business-motors-407012790.us-east-1.elb.amazonaws.com/api';
   private token: string | null = null;
   isAuthenticated = false;
 
